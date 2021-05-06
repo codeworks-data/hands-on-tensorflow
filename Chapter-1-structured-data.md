@@ -1,6 +1,12 @@
 ## **1. TensorFlow Modeling for Structured Data**
 
 ###  **1.1 Data Preparation**
+
+The purpose of this dataset is to predict whether a flight will be delayed for more than 15 minutes. <br>
+First, we will use `Pandas` library to pre-process the structured data. <br>
+We will introduce TensorFlow different modules to train deep learning models on the dataframe.
+
+
 ```{python}
 import os
 import numpy as np
@@ -105,6 +111,7 @@ model.add(layers.Dense(1, activation = 'sigmoid'))
 
 model.summary()
 ```
+
 ```
 Model: "sequential"
 _________________________________________________________________
@@ -126,6 +133,7 @@ _________________________________________________________________
 
 ###  **1.3 Model Training**
 
+Once the model architecture is ready, we can train the model, evaluate it, and run inference. <br>
 The simplist way to train a model using TensorFlow/Keras API is to call the internal function `fit()` method. <br>
 Note that there two other ways to train models : train_on_batch or a customized training loop. <br>
 
@@ -139,7 +147,7 @@ history = model.fit(features, labels,
                     epochs=30,
                     validation_split=0.2, # Use 20% of the training data for validation
                     shuffle=True,
-                    callbacks = [tensorboard_callback]
+                    # callbacks = [tensorboard_callback]
                    )
  ```
  ```
