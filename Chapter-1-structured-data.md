@@ -81,27 +81,10 @@ features.shape = (100_000, 8)
 ```
 
 ###  **1.2 Model Definition**
-Most models are made of layers. Layers are functions with a known mathematical structure that can be reused and have trainable variables. <br>
-Layers and models are build built on the same foundational class : `tf.Module`  <br>
 
-```{python}
-class SimpleModule(tf.Module):
-    def __init__(self, name=None):
-        super().__init__(name=name)
-        self.a_variable = tf.Variable(5.0, name="train_me")
-        self.non_trainable_variable = tf.Variable(5.0, trainable=False, name="do_not_train_me")
-    def __call__(self, x):
-        return self.a_variable * x + self.non_trainable_variable
+There are different ways of modeling using APIs of Keras: sequential modeling using `Sequential()` function, the functional API or a customized modeling by inheriting base class `Model`. <br>
 
-simple_module = SimpleModule(name="simple")
-
-simple_module(tf.constant(5.0))
-```
-```
-<tf.Tensor: shape=(), dtype=float32, numpy=30.0>
-```
 In this chapter, we will use the Keras `Sequential()` API to build models. <br>
-A Sequential model is appropriate for a plain stack of layers where each layer has exactly one input tensor and one output tensor.
 
 ```{python}
 model = models.Sequential()
@@ -134,10 +117,12 @@ _________________________________________________________________
 ###  **1.3 Model Training**
 
 Once the model architecture is ready, we can train the model, evaluate it, and run inference. <br>
-The simplist way to train a model using TensorFlow/Keras API is to call the internal function `fit()` method. <br>
+The simplest way to train a model using TensorFlow/Keras API is to call the internal function `fit()` method. <br>
 Note that there two other ways to train models : train_on_batch or a customized training loop. <br>
 
 ```{python}
+# Here we use binary cross entropy loss function for binary classification
+
 model.compile(optimizer='adam',
             loss='binary_crossentropy',
             metrics=['AUC'])
