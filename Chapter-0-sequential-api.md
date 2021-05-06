@@ -1,6 +1,6 @@
 ## **1. Deep dive into TensorFlow/Keras Sequential API**
 
-```{python}
+```python
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -11,7 +11,7 @@ from tensorflow.keras import layers
 Most models are made of layers. Layers are functions with a known mathematical structure that can be reused and have trainable variables. <br>
 Layers and models are build built on the same foundational class : `tf.Module`  <br>
 
-```{python}
+```python
 class SimpleModule(tf.Module):
     def __init__(self, name=None):
         super().__init__(name=name)
@@ -29,7 +29,7 @@ simple_module(tf.constant(5.0))
 ```
 So, we can define a `Dense` layer as follows.
 
-```{python}
+```python
 class Dense(tf.Module):
     def __init__(self, in_features, out_features, name=None):
         super().__init__(name=name)
@@ -41,7 +41,7 @@ class Dense(tf.Module):
         y = tf.matmul(x, self.w) + self.b
         return tf.nn.relu(y)
 ```
-```{python}
+```python
 dense_1 = Dense(in_features=2, out_features=3)
 dense_1.variables
 ```

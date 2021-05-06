@@ -7,7 +7,7 @@ First, we will use `Pandas` library to pre-process the structured data. <br>
 We will introduce TensorFlow different modules to train deep learning models on the dataframe.
 
 
-```{python}
+```python
 import os
 import numpy as np
 import pandas as pd
@@ -25,7 +25,7 @@ train.head()
 ```
 ![](data/flight-delays/train_head.png)
 
-```{python}
+```python
 def preprocess(df):
     for col in ('Month', 'DayofMonth', 'DayOfWeek'):
         df[col] =  [int(x[2:]) for x in df[col]]      
@@ -50,7 +50,7 @@ train = preprocess_train(train)
  ```
 ![](data/flight-delays/train_preprocess.png)
 
-```{python}
+```python
 ax = train['delayed'].value_counts().plot(kind = 'bar',
      figsize = (10,8),fontsize=15, rot = 0)
 ax.set_ylabel('Count',fontsize = 15)
@@ -59,7 +59,7 @@ plt.show()
 ```
 ![](data/flight-delays/label.png)
 
-```{python}
+```python
 %config InlineBackend.figure_format = 'png'
 ax = train['Distance'].plot(kind = 'hist',bins = 20,color= 'purple',
                     figsize = (10,8),fontsize=15)
@@ -70,7 +70,7 @@ plt.show()
 ```
 ![](data/flight-delays/distance.png)
 
-```{python}
+```python
 features = train.drop(["delayed"], axis=1)
 labels = train["delayed"]
 
@@ -86,7 +86,7 @@ There are different ways of modeling using APIs of Keras: sequential modeling us
 
 In this chapter, we will use the Keras `Sequential()` API to build models. <br>
 
-```{python}
+```python
 model = models.Sequential()
 model.add(layers.Dense(32, activation = 'relu', input_shape=(features.shape[1],)))
 model.add(layers.Dense(32, activation = 'relu'))
@@ -120,7 +120,7 @@ Once the model architecture is ready, we can train the model, evaluate it, and r
 The simplest way to train a model using TensorFlow/Keras API is to call the internal function `fit()` method. <br>
 Note that there two other ways to train models : train_on_batch or a customized training loop. <br>
 
-```{python}
+```python
 # Here we use binary cross entropy loss function for binary classification
 
 model.compile(optimizer='adam',
